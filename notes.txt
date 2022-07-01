@@ -1,0 +1,30 @@
+Game files are in WindowsNoEditor/Mercury/Content.
+
+./MusicData : Charts
+	- folders are song IDs
+	- .mer format (text-readable, UTF-8)
+
+./Sound/Bgm : Various music (including levels')
+	- all music appear to be stored in MER_BGM.awb (including some test audio)
+		a. unpack using VGMToolbox
+		b. resulting .bin files are in HCA format (decode with VGAudio, .bin files must end with .hca)
+		c. songs (maybe all audio?) come in pairs: 1st is unaltered (headphones?), 2nd is eq'd (cab speakers?)
+	- audio data's stored order might be same as ID?
+
+./Table/MusicParameterTable.uasset
+	- UAsset file; read stored DataTable with UAssetGUI (export to JSON and scrape)
+	- contains song info (ID to name, artist, levels, etc.)
+	- does not contain .hca offsets
+
+https://wacca.marv.jp/music/ : Latest official song database (online)
+	- inspect element to get ID of song
+	- excludes songs removed over time
+	- scrape the HTML
+
+song db lines up with audio until HOT LIMIT (S01-008); its audio is present in game but is not in expected HCA position
+
+
+[KNOWN SONGS OF "LILY R"]
+S01-001 = audio 36/37 (Bad Apple)
+S01-002 = audio 38/39 (Night of Nights)
+S01-008 = audio 360 (HOT LIMIT) <---- expected at 48 (diff 312)
